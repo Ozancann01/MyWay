@@ -1,4 +1,4 @@
-package myway.src;
+package src;
 
 public abstract class User {
     private String naam;

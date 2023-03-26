@@ -1,4 +1,4 @@
-package myway.src;
+package src;
 
 public class Stappenteller extends User {
     private int stappen;
