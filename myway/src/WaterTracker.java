@@ -1,4 +1,4 @@
-package myway.src;
+package src;
 
 public class WaterTracker extends User {
     private double waterinname;
