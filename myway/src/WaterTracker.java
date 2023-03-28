@@ -15,13 +15,22 @@ public class WaterTracker{
         return waterInname;
     }
 
-    public boolean isDoelBereikt() {
-        return waterInname >= doelInname;
+    public void isDoelBereikt() {
+
+        if (waterInname >= doelInname&& doelInname>0){
+            System.out.println("Doel is bereikt.");
+        }
+        else {
+            if (doelInname==0){
+                System.out.println("Doel is   nog niet ingesteld.");
+            }else {
+                System.out.println("Doel is  niet  bereikt.");
+            }
+
+        }
     }
 
-    public void stopWaterTracker() {
-        waterInname = 0;
-    }
+
     public void setWaterInname(double waterInname) {
         this.waterInname = waterInname;
     }

@@ -46,7 +46,8 @@ public class Main {
             System.out.println("5. Voeg een training toe");
             System.out.println("6. Verwijder een training");
             System.out.println("7. Bekijk informatie over trainingen");
-            System.out.println("8. Afsluiten");
+            System.out.println("8. Bekijk informatie over trackers");
+            System.out.println("9. Afsluiten");
             System.out.print("Uw keuze: ");
             keuze = scanner.nextInt();
             scanner.nextLine(); // consume newline character
@@ -190,15 +191,42 @@ public class Main {
                         }
                     }
                     break;
+
                 case 8:
+
+                    System.out.println("Kies resultaaten van  welke tracker u wilt zien:");
+                    System.out.println("1. WaterTracker");
+                    System.out.println("2. Stappenteller");
+                    System.out.println("3. VastenTracker");
+                    System.out.print("Uw keuze: ");
+                    int trackerType1 = scanner.nextInt();
+                    switch (trackerType1){
+                        case 1:
+                            user.waterTracker.isDoelBereikt();
+                            break;
+                        case 2:
+                            user.stappenteller.isDoelBereikt();
+                            break;
+                        case 3:
+                            user.vastenTracker.isDoelBereikt();
+                        default:
+                            System.out.println("Ongeldige keuze. Probeer opnieuw.");
+                    }
+
+// Bekijk informatie over trainingen
+
+
+
+                case 9:
                     // Afsluiten
-                    System.out.println("Bedankt voor het gebruiken van de fitness tracker. Tot ziens!");
+
                     break;
                 default:
                     System.out.println("Ongeldige keuze. Probeer opnieuw.");
             }
-        } while (keuze != 8);
+        } while (keuze != 9);
 
         scanner.close();
+        System.out.println("Bedankt voor het gebruiken van de fitness tracker. Tot ziens!");
     }
 }

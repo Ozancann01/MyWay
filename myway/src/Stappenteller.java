@@ -15,8 +15,20 @@ public class Stappenteller {
         return stappen;
     }
 
-    public boolean isDoelBereikt() {
-        return stappen >= doelStappen;
+    public void isDoelBereikt() {
+
+        if (stappen >= doelStappen&& doelStappen>0){
+            System.out.println("Doel is bereikt.");
+        }
+        else {
+            if (doelStappen==0){
+                System.out.println("Doel is   nog niet ingesteld.");
+            }else {
+                System.out.println("Doel is  niet  bereikt.");
+            }
+
+        }
+
     }
 
     public void stopStappenteller() {

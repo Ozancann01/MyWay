@@ -35,12 +35,21 @@ public class VastenTracker{
         return vastenUren;
     }
 
-    public boolean isDoelBereikt() {
-        return vastenUren >= doelUren;
-    }
+    public void isDoelBereikt() {
 
-    public void stopVastenTracker() {
-        vastenUren = 0;
+        if (vastenUren >= doelUren&& doelUren>0){
+            System.out.println("Doel is bereikt.");
+        }
+        else {
+            if (doelUren==0){
+                System.out.println("Doel is   nog niet ingesteld.");
+            }else {
+                System.out.println("Doel is  niet  bereikt.");
+            }
+
+        }
+
+
     }
 
     public void setVastenUren(int vastenUren) {
