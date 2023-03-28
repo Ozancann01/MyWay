@@ -3,31 +3,43 @@ package src;
 
 import java.time.LocalDateTime;
 
-public class VastenTracker extends User {
-    private boolean vastenStatus;
-    private LocalDateTime starttijd;
-    private LocalDateTime eindtijd;
+public class VastenTracker {
 
-    public VastenTracker(String naam, int leeftijd, double gewicht, double lengte) {
-        super(naam, leeftijd, gewicht, lengte);
+
+    private int vastenUren;
+    private int doelUren;
+
+    public VastenTracker(int doelUren) {
+        vastenUren = 0;
+        this.doelUren = doelUren;
     }
 
-    public void startVasten() {
-        vastenStatus = true;
-        starttijd = LocalDateTime.now();
+    public void voegUrenToe(int uren) {
+        vastenUren += uren;
     }
 
-    public void stopVasten() {
-        vastenStatus = false;
-        eindtijd = LocalDateTime.now();
+    public int getVastenUren() {
+        return vastenUren;
     }
 
-    @Override
-    public String getStatus() {
-        if (vastenStatus) {
-            return "Vasten gestart op: " + starttijd;
-        } else {
-            return "Vasten gestopt op: " + eindtijd;
-        }
+    public boolean isDoelBereikt() {
+        return vastenUren >= doelUren;
     }
+
+    public void stopVastenTracker() {
+        vastenUren = 0;
+    }
+
+    public void setVastenUren(int vastenUren) {
+        this.vastenUren = vastenUren;
+    }
+
+    public int getDoelUren() {
+        return doelUren;
+    }
+
+    public void setDoelUren(int doelUren) {
+        this.doelUren = doelUren;
+    }
+
 }

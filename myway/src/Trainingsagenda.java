@@ -1,26 +1,39 @@
 package src;
 
+import src.trainingSorten.Training;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
-public class Trainingsagenda extends User {
-    private List<String> trainingen;
+public class Trainingsagenda {
 
-    public Trainingsagenda(String naam, int leeftijd, double gewicht, double lengte) {
-        super(naam, leeftijd, gewicht, lengte);
-        this.trainingen = new ArrayList<>();
+
+    private ArrayList<Training> trainingen = new ArrayList<>();
+
+
+
+
+    public ArrayList<Training> getTrainingen() {
+        return trainingen;
     }
 
-    public void voegTrainingToe(String training) {
+
+    public void voegTrainingToe(Training training) {
         trainingen.add(training);
     }
 
-    public void verwijderTraining(String training) {
-        trainingen.remove(training);
+    public void verwijderTraining(String trainingNaam) {
+        trainingen.removeIf(training -> training.getNaam().equals(trainingNaam));
     }
 
-    @Override
-    public String getStatus() {
-        return "Trainingen: " + String.join(", ", trainingen);
+    public List<Training> getAlleTrainingen() {
+        return new ArrayList<>(trainingen);
     }
+
+
+    public void setTrainingen(ArrayList<Training> trainingen) {
+        this.trainingen = trainingen;
+    }
+
 }
