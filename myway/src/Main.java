@@ -4,7 +4,6 @@ import src.trainingSorten.CardioTraining;
 import src.trainingSorten.KrachtTraining;
 import src.trainingSorten.Oefening;
 import src.trainingSorten.Training;
-
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,6 +11,9 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+
+
+
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Welkom bij de fitness tracker!");
@@ -38,32 +40,79 @@ public class Main {
         do {
             System.out.println("\nKies een optie:");
             System.out.println("1. Stel doelen in voor WaterTracker, Stappenteller en VastenTracker");
-            System.out.println("2. Voeg een training toe");
-            System.out.println("3. Verwijder een training");
-            System.out.println("4. Bekijk informatie over trainingen");
-            System.out.println("5. Afsluiten");
+            System.out.println("2. Update WaterTracker");
+            System.out.println("3. Update Stappenteller");
+            System.out.println("4. Start/Stop VastenTracker");
+            System.out.println("5. Voeg een training toe");
+            System.out.println("6. Verwijder een training");
+            System.out.println("7. Bekijk informatie over trainingen");
+            System.out.println("8. Afsluiten");
             System.out.print("Uw keuze: ");
             keuze = scanner.nextInt();
             scanner.nextLine(); // consume newline character
 
             switch (keuze) {
                 case 1:
-                    // Stel doelen in voor WaterTracker, Stappenteller en VastenTracker
-                    System.out.print("Stel een doel in voor de WaterTracker (in ml): ");
-                    int waterDoel = scanner.nextInt();
-                    user.startWaterTracker(waterDoel);
-
-                    System.out.print("Stel een doel in voor de Stappenteller: ");
-                    int stappenDoel = scanner.nextInt();
-                    user.startStappenteller(stappenDoel);
-
-                    System.out.print("Stel een doel in voor de VastenTracker (in uren): ");
-                    int vastenDoel = scanner.nextInt();
-                    user.startVastenTracker(vastenDoel);
-
-                    System.out.println("Doelen ingesteld!");
+                    // Start WaterTracker, Stappenteller of VastenTracker
+                    System.out.println("Kies welke tracker u wilt starten:");
+                    System.out.println("1. WaterTracker");
+                    System.out.println("2. Stappenteller");
+                    System.out.println("3. VastenTracker");
+                    System.out.print("Uw keuze: ");
+                    int trackerType = scanner.nextInt();
+                    switch (trackerType) {
+                        case 1:
+                            // Start WaterTracker
+                            System.out.print("Stel een doel in voor de WaterTracker (in ml): ");
+                            int waterDoel = scanner.nextInt();
+                            user.waterTracker.setDoelInname(waterDoel);
+                            System.out.println("WaterTracker doel ingesteld!");
+                            break;
+                        case 2:
+                            // Start Stappenteller
+                            System.out.print("Stel een doel in voor de Stappenteller: ");
+                            int stappenDoel = scanner.nextInt();
+                            user.stappenteller.setDoelStappen(stappenDoel);
+                            System.out.println("Stappenteller doel ingesteld!");
+                            break;
+                        case 3:
+                            // Start VastenTracker
+                            System.out.print("Stel een doel in voor de VastenTracker (in uren): ");
+                            int vastenDoel = scanner.nextInt();
+                            user.vastenTracker.setDoelUren(vastenDoel);
+                            System.out.println("VastenTracker doel ingesteld!");
+                            break;
+                        default:
+                            System.out.println("Ongeldige keuze. Probeer opnieuw.");
+                    }
                     break;
+
                 case 2:
+                    // Update WaterTracker
+                    System.out.print("Voer de hoeveelheid water in die u heeft gedronken (in ml): ");
+                    int waterInname = scanner.nextInt();
+                    user.waterTracker.voegWaterToe(waterInname);
+                    System.out.println("WaterTracker bijgewerkt!");
+
+                    break;
+                case 3:
+                    // Update Stappenteller
+                    System.out.print("Voer het aantal stappen in dat u heeft gezet: ");
+                    int stappen = scanner.nextInt();
+                    user.stappenteller.voegStappenToe(stappen);
+                    System.out.println("Stappenteller bijgewerkt!");
+                    break;
+                case 4:
+                    // Start/Stop VastenTracker
+                    if (user.vastenTracker.isVasten()) {
+                        user.vastenTracker.stopVasten();
+                        System.out.println("Vasten gestopt!");
+                    } else {
+                        user.vastenTracker.startVasten();
+                        System.out.println("Vasten gestart!");
+                    }
+                    break;
+                case 5:
                     // Voeg een training toe
                     System.out.println("Kies het type training:");
                     System.out.println("1. CardioTraining");
@@ -71,7 +120,6 @@ public class Main {
                     System.out.print("Uw keuze: ");
                     int trainingType = scanner.nextInt();
                     scanner.nextLine(); // consume newline character
-                    user.startTrainingsagenda();
                     if (trainingType == 1) {
                         // CardioTraining
                         System.out.print("Voer de naam van training in: ");
@@ -87,8 +135,9 @@ public class Main {
                         CardioTraining cardioTraining = new CardioTraining(naamCardio,duur, aantalIntervallen, new Date(), new Time(System.currentTimeMillis()), beschrijving);
                         user.trainingsagenda.voegTrainingToe(cardioTraining);
                         System.out.println("CardioTraining toegevoegd!");
+
                     } else if (trainingType == 2) {
-// KrachtTraining
+                        // KrachtTraining
                         System.out.println("Voeg oefeningen toe:");
                         ArrayList<Oefening> oefeningen = new ArrayList<>();
                         String oefeningNaam;
@@ -122,15 +171,15 @@ public class Main {
                         System.out.println("Ongeldige keuze.");
                     }
                     break;
-                case 3:
+                case 6:
                     // Verwijder een training
                     System.out.print("Voer de naam van de training in die u wilt verwijderen: ");
                     String trainingNaam = scanner.nextLine();
                     user.trainingsagenda.verwijderTraining(trainingNaam);
                     System.out.println("Training verwijderd!");
                     break;
-                case 4:
-                    // Bekijk informatie over trainingen
+                case 7:
+// Bekijk informatie over trainingen
                     ArrayList<Training> trainingen = user.trainingsagenda.getTrainingen();
                     if (trainingen.isEmpty()) {
                         System.out.println("Er zijn geen trainingen om weer te geven.");
@@ -141,15 +190,14 @@ public class Main {
                         }
                     }
                     break;
-
-                case 5:
+                case 8:
                     // Afsluiten
                     System.out.println("Bedankt voor het gebruiken van de fitness tracker. Tot ziens!");
                     break;
                 default:
                     System.out.println("Ongeldige keuze. Probeer opnieuw.");
             }
-        } while (keuze != 4);
+        } while (keuze != 8);
 
         scanner.close();
     }

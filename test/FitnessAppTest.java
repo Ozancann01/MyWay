@@ -61,8 +61,8 @@ public class FitnessAppTest  {
         String krachtInfo = krachtTraining.getInformatie();
 
         // Assert
-        assertEquals("Intervaltraining sessie met 5 intervallen.", cardioInfo);
-        assertEquals("Krachttraining sessie met 1 oefeningen.", krachtInfo);
+        assertEquals("Intervaltraining sessie met 5 intervallen.En duur van 30", cardioInfo);
+        assertEquals("Krachttraining sessie met 1 oefeningen.En met rust tijd van 60", krachtInfo);
     }
 
 

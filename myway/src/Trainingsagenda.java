@@ -12,8 +12,6 @@ public class Trainingsagenda {
     private ArrayList<Training> trainingen = new ArrayList<>();
 
 
-
-
     public ArrayList<Training> getTrainingen() {
         return trainingen;
     }

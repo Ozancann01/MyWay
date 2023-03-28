@@ -1,15 +1,11 @@
 package src;
 
-public class WaterTracker {
+public class WaterTracker{
 
 
     private double waterInname;
     private double doelInname;
 
-    public WaterTracker(double doelInname) {
-        waterInname = 0;
-        this.doelInname = doelInname;
-    }
 
     public void voegWaterToe(double hoeveelheid) {
         waterInname += hoeveelheid;
@@ -37,5 +33,6 @@ public class WaterTracker {
     public void setDoelInname(double doelInname) {
         this.doelInname = doelInname;
     }
+
 
 }
