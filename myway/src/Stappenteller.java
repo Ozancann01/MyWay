@@ -6,10 +6,6 @@ public class Stappenteller {
     private int stappen;
     private int doelStappen;
 
-    public Stappenteller(int doelStappen) {
-        stappen = 0;
-        this.doelStappen = doelStappen;
-    }
 
     public void voegStappenToe(int stappen) {
         this.stappen += stappen;
@@ -35,5 +31,7 @@ public class Stappenteller {
     public void setDoelStappen(int doelStappen) {
         this.doelStappen = doelStappen;
     }
+
+
 
 }

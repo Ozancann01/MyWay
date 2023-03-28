@@ -1,18 +1,31 @@
 package src;
 
 
-import java.time.LocalDateTime;
-
-public class VastenTracker {
+public class VastenTracker{
 
 
     private int vastenUren;
     private int doelUren;
 
-    public VastenTracker(int doelUren) {
-        vastenUren = 0;
-        this.doelUren = doelUren;
+    private boolean vastenBezig;
+
+
+    public void startVasten() {
+        if (!vastenBezig) {
+            vastenBezig = true;
+        }
     }
+
+    public void stopVasten() {
+        if (vastenBezig) {
+            vastenBezig = false;
+        }
+    }
+
+    public boolean isVasten() {
+        return vastenBezig;
+    }
+
 
     public void voegUrenToe(int uren) {
         vastenUren += uren;
@@ -41,5 +54,8 @@ public class VastenTracker {
     public void setDoelUren(int doelUren) {
         this.doelUren = doelUren;
     }
+
+
+
 
 }
