@@ -1,20 +1,41 @@
 package src;
 
-public class WaterTracker extends User {
-    private double waterinname;
-    private double waterinnameDoel;
+public class WaterTracker {
 
-    public WaterTracker(String naam, int leeftijd, double gewicht, double lengte, double waterinnameDoel) {
-        super(naam, leeftijd, gewicht, lengte);
-        this.waterinnameDoel = waterinnameDoel;
+
+    private double waterInname;
+    private double doelInname;
+
+    public WaterTracker(double doelInname) {
+        waterInname = 0;
+        this.doelInname = doelInname;
     }
 
-    public void registreerWater(double water) {
-        this.waterinname += water;
+    public void voegWaterToe(double hoeveelheid) {
+        waterInname += hoeveelheid;
     }
 
-    @Override
-    public String getStatus() {
-        return "Waterinname: " + waterinname + "L, Doel: " + waterinnameDoel + "L";
+    public double getWaterInname() {
+        return waterInname;
     }
+
+    public boolean isDoelBereikt() {
+        return waterInname >= doelInname;
+    }
+
+    public void stopWaterTracker() {
+        waterInname = 0;
+    }
+    public void setWaterInname(double waterInname) {
+        this.waterInname = waterInname;
+    }
+
+    public double getDoelInname() {
+        return doelInname;
+    }
+
+    public void setDoelInname(double doelInname) {
+        this.doelInname = doelInname;
+    }
+
 }

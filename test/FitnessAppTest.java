@@ -2,6 +2,13 @@ import org.junit.Test;
 import src.Stappenteller;
 import src.Trainingsagenda;
 import src.User;
+import src.trainingSorten.CardioTraining;
+import src.trainingSorten.KrachtTraining;
+import src.trainingSorten.Oefening;
+
+import java.sql.Time;
+import java.util.ArrayList;
+import java.util.Date;
 
 import static org.junit.Assert.*;
 
@@ -10,47 +17,54 @@ public class FitnessAppTest  {
 
 
     @Test
-    public void testBerekenBMI() {
+    public void berekenBMI() {
         // Arrange
-        User user = new Stappenteller("Jan", 30, 75, 180, 10000);
-        double expectedBMI = 75 / Math.pow(180 / 100.0, 2);
+        User user = new User("John Doe", 25, 70, 175);
 
         // Act
-        double actualBMI = user.berekenBMI();
+        double berekendeBMI = user.berekenBMI();
 
         // Assert
-        assertEquals("Fout bij het berekenen van BMI", expectedBMI, actualBMI, 0.001);
+        assertEquals(22.86, berekendeBMI, 0.01);
+    }
+
+
+    @Test
+    public void voegTrainingToeEnVerwijderTraining() {
+        // Arrange
+        Trainingsagenda trainingsagenda = new Trainingsagenda();
+        CardioTraining cardioTraining = new CardioTraining("Cardio1", 30, 5, new Date(), new Time(System.currentTimeMillis()), "Cardio training 1");
+        ArrayList<Oefening> oefeningen = new ArrayList<>();
+        oefeningen.add(new Oefening("Push-ups", "Push-ups beschrijving"));
+        KrachtTraining krachtTraining = new KrachtTraining("Kracht1", oefeningen, 60, 3, 10, new Date(), new Time(System.currentTimeMillis()), "Kracht training 1");
+
+        // Act
+        trainingsagenda.voegTrainingToe(cardioTraining);
+        trainingsagenda.voegTrainingToe(krachtTraining);
+        trainingsagenda.verwijderTraining("Cardio1");
+
+        // Assert
+        assertEquals(1, trainingsagenda.getAlleTrainingen().size());
+        assertTrue(trainingsagenda.getAlleTrainingen().contains(krachtTraining));
     }
 
     @Test
-    public void testStappenteller() {
+    public void testGetInformatie() {
         // Arrange
-        Stappenteller stappenteller = new Stappenteller("Jan", 30, 75, 180, 10000);
+        CardioTraining cardioTraining = new CardioTraining("Cardio1", 30, 5, new Date(), new Time(System.currentTimeMillis()), "Cardio training 1");
+        ArrayList<Oefening> oefeningen = new ArrayList<>();
+        oefeningen.add(new Oefening("Push-ups", "Push-ups beschrijving"));
+        KrachtTraining krachtTraining = new KrachtTraining("Kracht1", oefeningen, 60, 3, 10, new Date(), new Time(System.currentTimeMillis()), "Kracht training 1");
 
         // Act
-        stappenteller.registreerStappen(5000);
-        stappenteller.registreerStappen(2000);
-        String status = stappenteller.getStatus();
+        String cardioInfo = cardioTraining.getInformatie();
+        String krachtInfo = krachtTraining.getInformatie();
 
         // Assert
-        assertTrue("Fout bij het bijhouden van stappen",status.contains("Stappen: 7000"));
+        assertEquals("Intervaltraining sessie met 5 intervallen.", cardioInfo);
+        assertEquals("Krachttraining sessie met 1 oefeningen.", krachtInfo);
     }
 
-    @Test
-    public void testTrainingsagenda() {
-        // Arrange
-        Trainingsagenda trainingsagenda = new Trainingsagenda("Piet", 28, 80, 175);
 
-        // Act
-        trainingsagenda.voegTrainingToe("Hardlopen");
-        trainingsagenda.voegTrainingToe("Krachttraining");
-        String statusNaToevoegen = trainingsagenda.getStatus();
-        trainingsagenda.verwijderTraining("Hardlopen");
-        String statusNaVerwijderen = trainingsagenda.getStatus();
-
-        // Assert
-        assertTrue("Fout bij het toevoegen van trainingen",statusNaToevoegen.contains("Hardlopen") && statusNaToevoegen.contains("Krachttraining") );
-        assertTrue("Fout bij het verwijderen van trainingen",!statusNaVerwijderen.contains("Hardlopen") && statusNaVerwijderen.contains("Krachttraining") );
-    }
 }
 
