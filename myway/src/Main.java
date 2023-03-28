@@ -32,7 +32,8 @@ public class Main {
 
         User user = new User(naam, leeftijd, gewicht, lengte);
 
-        System.out.println("Hallo, " + user.getNaam() + "! Uw BMI is: " + user.berekenBMI());
+        System.out.println("Hallo, " + user.getNaam() );
+        user.printBMICategorie();
 
         // Voeg hier de logica toe om de rest van het programma uit te voeren
         // bijvoorbeeld het toevoegen van trainingen, het instellen van doelen, enz.
